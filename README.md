@@ -28,27 +28,9 @@ KERNEL_DEVICETREE_append = "overlays/ads7846-overlay.dtb"
 
 ### Calibration with X11
 
-To perform a calibration in the X11 will type the following at the console, such as ssh.
-
-```bash
-$ DISPLAY=:0.0 xinput_calibrator
-```
-
-Then, the results are displayed as follows,to create the '/etc/X11/xorg.conf.d/99-calibration.conf'.
+In order to perform a calibration in the X11 such a core-image-sato, add the following line to your local.conf.
 
 ```txt
-Calibrating EVDEV driver for "ADS7846 Touchscreen" id=6
-	current calibration values (from XInput): min_x=102, max_x=3934 and min_y=330, max_y=3868
-
-Doing dynamic recalibration:
-	Setting calibration data: 60, 3976, 332, 3885
-	--> Making the calibration permanent <--
-  copy the snippet below into '/etc/X11/xorg.conf.d/99-calibration.conf'
-Section "InputClass"
-	Identifier	"calibration"
-	MatchProduct	"ADS7846 Touchscreen"
-	Option	"Calibration"	"60 3976 332 3885"
-	Option	"SwapAxes"	"0"
-EndSection
+IMAGE_INSTALL_append = " xinput-calibrator"
 ```
-
+xinput-calibrator will perform automatically if appropriate calibration data does not exists.
