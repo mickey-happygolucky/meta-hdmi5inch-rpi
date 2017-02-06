@@ -31,6 +31,12 @@ KERNEL_DEVICETREE_append = "overlays/ads7846-overlay.dtb"
 In order to perform a calibration in the X11 such a core-image-sato, add the following line to your local.conf.
 
 ```txt
-IMAGE_INSTALL_append = " xinput-calibrator"
+MACHINE_FEATURES += "vc4graphics"
+IMAGE_INSTALL_append = " xf86-input-evdev"
+MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-edid-800x480"
 ```
-xinput-calibrator will perform automatically if appropriate calibration data does not exists.
+
+core-image-sato does not work without `vc4graphics` from morty branch.
+if `xf86-input-evdev` is not installed then mouse pointer will not moving dispite mouse is moved.
+Cocopar 5inch LCD does not provide EDID therefore KMS will be fail.
+`linux-firmware-edid-800x480` provides the EDID file to work KMS.
