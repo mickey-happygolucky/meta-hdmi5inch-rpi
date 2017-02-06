@@ -26,9 +26,9 @@ In order to enable the touchscreen, add the following line to your local.conf.
 KERNEL_DEVICETREE_append = "overlays/ads7846-overlay.dtb"
 ```
 
-### Calibration with X11
+## To work with core-image-sato
 
-In order to perform a calibration in the X11 such a core-image-sato, add the following line to your local.conf.
+In order to work core-image-sato, add the following lines to your local.conf.
 
 ```txt
 MACHINE_FEATURES += "vc4graphics"
